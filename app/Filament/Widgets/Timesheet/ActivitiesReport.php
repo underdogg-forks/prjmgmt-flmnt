@@ -19,7 +19,7 @@ class ActivitiesReport extends BarChartWidget
         'lg' => 3
     ];
 
-    public ?string $filter = '2023';
+    public ?string $filter = '2024';
 
     public function getHeading(): string
     {
@@ -30,7 +30,8 @@ class ActivitiesReport extends BarChartWidget
     {
         return [
             2022 => 2022,
-            2023 => 2023
+            2023 => 2023,
+            2024 => 2024,
         ];
     }
 

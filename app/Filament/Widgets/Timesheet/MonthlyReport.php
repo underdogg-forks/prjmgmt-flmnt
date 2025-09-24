@@ -18,7 +18,7 @@ class MonthlyReport extends BarChartWidget
         return __('Logged time monthly');
     }
 
-    public ?string $filter = '2023';
+    public ?string $filter = '2024';
 
     protected function getData(): array
     {
@@ -49,7 +49,8 @@ class MonthlyReport extends BarChartWidget
     {
         return [
             2022 => 2022,
-            2023 => 2023
+            2023 => 2023,
+            2024 => 2024,
         ];
     }
 
