@@ -205,12 +205,12 @@ trait KanbanScrumHelper
 
     protected function kanbanHeading(): string|Htmlable
     {
-        $heading = '<div class="w-full flex flex-col gap-1">';
+        $heading = '<div class="w-full flex flex-col">';
         $heading .= '<a href="' . route('filament.pages.board') . '"
                             class="text-primary-500 text-xs font-medium hover:underline">';
         $heading .= __('Back to board');
         $heading .= '</a>';
-        $heading .= '<div class="flex flex-col gap-1">';
+        $heading .= '<div class="flex flex-col">';
         $heading .= '<span>' . __('Kanban');
         if ($this->project) {
             $heading .= ' - ' . $this->project->name . '</span>';
@@ -227,12 +227,12 @@ trait KanbanScrumHelper
 
     protected function scrumHeading(): string|Htmlable
     {
-        $heading = '<div class="w-full flex flex-col gap-1">';
+        $heading = '<div class="w-full flex flex-col">';
         $heading .= '<a href="' . route('filament.pages.board') . '"
                             class="text-primary-500 text-xs font-medium hover:underline">';
         $heading .= __('Back to board');
         $heading .= '</a>';
-        $heading .= '<div class="flex flex-col gap-1">';
+        $heading .= '<div class="flex flex-col">';
         $heading .= '<span>' . __('Scrum');
         if ($this->project) {
             $heading .= ' - ' . $this->project->name . '</span>';
@@ -251,7 +251,7 @@ trait KanbanScrumHelper
     {
         if ($this->project?->currentSprint) {
             return new HtmlString(
-                '<div class="w-full flex flex-col gap-1">'
+                '<div class="w-full flex flex-col">'
                 . '<div class="w-full flex items-center gap-2">'
                 . '<span class="bg-danger-500 px-2 py-1 rounded text-white text-sm">'
                 . $this->project->currentSprint->name

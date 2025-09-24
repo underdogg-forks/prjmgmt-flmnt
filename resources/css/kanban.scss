@@ -1,26 +1,26 @@
 .kanban-container {
-    @apply w-full flex gap-2 overflow-x-auto;
+    @apply w-full flex;
 
     .kanban-statuses {
-        @apply w-full flex flex-col gap-2;
+        @apply w-full flex flex-col;
 
         min-width: 250px;
 
         .status-header {
-            @apply w-full flex gap-1 items-center bg-white p-3 mb-3 text-xs font-medium text-gray-400 uppercase rounded-t border-b-4;
+            @apply w-full flex items-center bg-white p-3 mb-3 text-xs font-medium text-gray-400 uppercase rounded-t border-b-4;
         }
 
         .status-container {
-            @apply relative w-full flex flex-col gap-2 bg-white p-2 rounded overflow-y-auto overflow-x-hidden border-b-4;
+            @apply relative w-full flex flex-col bg-white p-2 rounded overflow-y-auto overflow-x-hidden border-b-4;
 
             height: calc(100vh);
 
             .create-record {
-                @apply flex items-center gap-1 mt-auto text-xs text-gray-500 p-3 bg-transparent hover:text-gray-600 hover:bg-gray-100 rounded;
+                @apply flex items-center mt-auto text-xs text-gray-500 p-3 bg-transparent hover:text-gray-600 hover:bg-gray-100 rounded;
             }
 
             .kanban-record {
-                @apply w-full flex flex-col gap-4 rounded bg-gray-50 border border-gray-200 p-3 hover:shadow hover:bg-gray-100 relative;
+                @apply w-full flex flex-col rounded bg-gray-50 border border-gray-200 p-3 hover:shadow hover:bg-gray-100 relative;
 
                 .handle {
                     @apply absolute top-0 right-0 text-gray-500 opacity-0 hover:cursor-pointer bg-gray-100 hover:bg-gray-200 rounded-bl p-2 transition;
@@ -70,7 +70,7 @@
                     @apply w-full flex flex-col gap-1;
 
                     & > div {
-                        @apply flex items-center gap-1 text-sm text-gray-600;
+                        @apply flex items-center text-sm text-gray-600;
 
                         a {
                             @apply font-medium hover:underline;
@@ -79,7 +79,7 @@
                 }
 
                 .record-logged-hours {
-                    @apply flex items-center gap-1 text-gray-500 text-xs;
+                    @apply flex items-center text-gray-500 text-xs;
                 }
             }
         }

@@ -56,7 +56,7 @@ class LatestTickets extends BaseWidget
             TextColumn::make('name')
                 ->label(__('Ticket'))
                 ->formatStateUsing(fn ($record) => new HtmlString('
-                    <div class="flex flex-col gap-1">
+                    <div class="flex flex-col">
                         <span class="text-gray-400 font-medium text-xs">
                             ' . $record->project->name . '
                         </span>
@@ -70,7 +70,7 @@ class LatestTickets extends BaseWidget
                         </span>
                         ' . ($record->responsible ? '
                         <div class="flex items-center gap-3">
-                            <div class="flex items-center gap-1 text-xs text-gray-400">'
+                            <div class="flex items-center text-xs text-gray-400">'
                         . view('components.user-avatar', ['user' => $record->responsible])
                         . '<span>' . $record->responsible?->name . '</span>'
                         . '</div>

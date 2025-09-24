@@ -2,7 +2,7 @@
 <x-filament::page>
 
     <a href="{{ route('filament.pages.kanban/{project}', ['project' => $record->project->id]) }}"
-       class="flex items-center gap-1 text-gray-500 hover:text-gray-700 font-medium text-xs">
+       class="flex items-center text-gray-500 hover:text-gray-700 font-medium text-xs">
         <x-heroicon-o-arrow-left class="w-4 h-4"/> {{ __('Back to kanban board') }}
     </a>
 
@@ -11,12 +11,12 @@
         <x-filament::card class="md:w-2/3 w-full flex flex-col gap-5">
             <div class="w-full flex flex-col gap-0">
                 <div class="flex items-center gap-2">
-                    <span class="flex items-center gap-1 text-sm text-primary-500 font-medium">
+                    <span class="flex items-center text-sm text-primary-500 font-medium">
                         <x-heroicon-o-ticket class="w-4 h-4"/>
                         {{ $record->code }}
                     </span>
                     <span class="text-sm text-gray-400 font-light">|</span>
-                    <span class="flex items-center gap-1 text-sm text-gray-500">
+                    <span class="flex items-center text-sm text-gray-500">
                         {{ $record->project->name }}
                     </span>
                 </div>
@@ -52,21 +52,21 @@
         </x-filament::card>
 
         <x-filament::card class="md:w-1/3 w-full flex flex-col">
-            <div class="w-full flex flex-col gap-1" wire:ignore>
+            <div class="w-full flex flex-col" wire:ignore>
                 <span class="text-gray-500 text-sm font-medium">
                     {{ __('Owner') }}
                 </span>
-                <div class="w-full flex items-center gap-1 text-gray-500">
+                <div class="w-full flex items-center text-gray-500">
                     <x-user-avatar :user="$record->owner"/>
                     {{ $record->owner->name }}
                 </div>
             </div>
 
-            <div class="w-full flex flex-col gap-1 pt-3" wire:ignore>
+            <div class="w-full flex flex-col pt-3" wire:ignore>
                 <span class="text-gray-500 text-sm font-medium">
                     {{ __('Responsible') }}
                 </span>
-                <div class="w-full flex items-center gap-1 text-gray-500">
+                <div class="w-full flex items-center text-gray-500">
                     @if($record->responsible)
                         <x-user-avatar :user="$record->responsible"/>
                     @endif
@@ -75,11 +75,11 @@
             </div>
 
             @if($record->project->type === 'scrum')
-                <div class="w-full flex flex-col gap-1 pt-3">
+                <div class="w-full flex flex-col pt-3">
                     <span class="text-gray-500 text-sm font-medium">
                         {{ __('Sprint') }}
                     </span>
-                    <div class="w-full flex flex-col justify-center gap-1 text-gray-500">
+                    <div class="w-full flex flex-col justify-center text-gray-500">
                         @if($record->sprint)
                             {{ $record->sprint->name }}
                             <span class="text-xs text-gray-400">
@@ -92,11 +92,11 @@
                     </div>
                 </div>
             @else
-                <div class="w-full flex flex-col gap-1 pt-3">
+                <div class="w-full flex flex-col pt-3">
                     <span class="text-gray-500 text-sm font-medium">
                         {{ __('Epic') }}
                     </span>
-                    <div class="w-full flex items-center gap-1 text-gray-500">
+                    <div class="w-full flex items-center text-gray-500">
                         @if($record->epic)
                             {{ $record->epic->name }}
                         @else
@@ -106,11 +106,11 @@
                 </div>
             @endif
 
-            <div class="w-full flex flex-col gap-1 pt-3">
+            <div class="w-full flex flex-col pt-3">
                 <span class="text-gray-500 text-sm font-medium">
                     {{ __('Estimation') }}
                 </span>
-                <div class="w-full flex items-center gap-1 text-gray-500">
+                <div class="w-full flex items-center text-gray-500">
                     @if($record->estimation)
                         {{ $record->estimationForHumans }}
                     @else
@@ -119,7 +119,7 @@
                 </div>
             </div>
 
-            <div class="w-full flex flex-col gap-1 pt-3">
+            <div class="w-full flex flex-col pt-3">
                 <span class="text-gray-500 text-sm font-medium">
                     {{ __('Total time logged') }}
                 </span>
@@ -146,7 +146,7 @@
                             </div>
                         </div>
                     @else
-                        <div class="w-full flex items-center gap-1 text-gray-500">
+                        <div class="w-full flex items-center text-gray-500">
                             {{ $record->totalLoggedHours }}
                         </div>
                     @endif
@@ -155,11 +155,11 @@
                 @endif
             </div>
 
-            <div class="w-full flex flex-col gap-1 pt-3">
+            <div class="w-full flex flex-col pt-3">
                 <span class="text-gray-500 text-sm font-medium">
                     {{ __('Subscribers') }}
                 </span>
-                <div class="w-full flex items-center gap-1 text-gray-500">
+                <div class="w-full flex items-center text-gray-500">
                     @if($record->subscribers->count())
                         @foreach($record->subscribers as $subscriber)
                             <x-user-avatar :user="$subscriber"/>
@@ -170,7 +170,7 @@
                 </div>
             </div>
 
-            <div class="w-full flex flex-col gap-1 pt-3">
+            <div class="w-full flex flex-col pt-3">
                 <span class="text-gray-500 text-sm font-medium">
                     {{ __('Creation date') }}
                 </span>
@@ -182,7 +182,7 @@
                 </div>
             </div>
 
-            <div class="w-full flex flex-col gap-1 pt-3">
+            <div class="w-full flex flex-col pt-3">
                 <span class="text-gray-500 text-sm font-medium">
                     {{ __('Last update') }}
                 </span>
@@ -195,13 +195,13 @@
             </div>
 
             @if($record->relations->count())
-                <div class="w-full flex flex-col gap-1 pt-3">
+                <div class="w-full flex flex-col pt-3">
                     <span class="text-gray-500 text-sm font-medium">
                         {{ __('Ticket relations') }}
                     </span>
                     <div class="w-full text-gray-500">
                         @foreach($record->relations as $relation)
-                            <div class="w-full flex items-center gap-1 text-xs">
+                            <div class="w-full flex items-center text-xs">
                                 <span class="rounded px-2 py-1 text-white
                                              bg-{{ config('system.tickets.relations.colors.' . $relation->type) }}-600">
                                     {{ __(config('system.tickets.relations.list.' . $relation->type)) }}
@@ -225,7 +225,7 @@
             <div class="w-full flex items-center gap-2">
                 <button wire:click="selectTab('comments')"
                         class="md:text-xl text-sm p-3 border-b-2 border-transparent hover:border-primary-500 flex items-center
-                        gap-1 @if($tab === 'comments') border-primary-500 text-primary-500 @else text-gray-700 @endif">
+                        @if($tab === 'comments') border-primary-500 text-primary-500 @else text-gray-700 @endif">
                     {{ __('Comments') }}
                 </button>
                 <button wire:click="selectTab('activities')"
@@ -262,8 +262,8 @@
                     <div
                         class="w-full flex flex-col gap-2 @if(!$loop->last) pb-5 mb-5 border-b border-gray-200 @endif ticket-comment">
                         <div class="w-full flex justify-between">
-                            <span class="flex items-center gap-1 text-gray-500 text-sm">
-                                <span class="font-medium flex items-center gap-1">
+                            <span class="flex items-center text-gray-500 text-sm">
+                                <span class="font-medium flex items-center">
                                     <x-user-avatar :user="$comment->user"/>
                                     {{ $comment->user->name }}
                                 </span>
@@ -297,8 +297,8 @@
                         @foreach($record->activities->sortByDesc('created_at') as $activity)
                             <div class="w-full flex flex-col gap-2
                                  @if(!$loop->last) pb-5 mb-5 border-b border-gray-200 @endif">
-                                <span class="flex items-center gap-1 text-gray-500 text-sm">
-                                    <span class="font-medium flex items-center gap-1">
+                                <span class="flex items-center text-gray-500 text-sm">
+                                    <span class="font-medium flex items-center">
                                         <x-user-avatar :user="$activity->user"/>
                                         {{ $activity->user->name }}
                                     </span>
@@ -306,7 +306,7 @@
                                     {{ $activity->created_at->format('Y-m-d g:i A') }}
                                     ({{ $activity->created_at->diffForHumans() }})
                                 </span>
-                                <div class="w-full flex items-center gap-10">
+                                <div class="w-full flex items-center">
                                     <span class="text-gray-400">{{ $activity->oldStatus->name }}</span>
                                     <x-heroicon-o-arrow-right class="w-6 h-6"/>
                                     <span style="color: {{ $activity->newStatus->color }}">

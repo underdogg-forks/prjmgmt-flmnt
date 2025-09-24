@@ -30,7 +30,7 @@ class AppServiceProvider extends ServiceProvider
         $this->configureApp();
 
         Filament::serving(static function () {
-            // Register custom Filament theme (CSS) - includes tippy.js via @import in filament.scss
+            // Register custom Filament theme (CSS)
             Filament::registerTheme(
                 app(Vite::class)('resources/css/filament.scss'),
             );

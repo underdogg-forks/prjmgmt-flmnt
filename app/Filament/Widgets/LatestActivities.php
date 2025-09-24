@@ -57,7 +57,7 @@ class LatestActivities extends BaseWidget
                 ->label(__('Ticket'))
                 ->formatStateUsing(function ($record, $state) {
                     return new HtmlString('
-                    <div class="flex flex-col gap-1">
+                    <div class="flex flex-col">
                         <span class="text-gray-400 font-medium text-xs">
                             ' . $state->project->name . '
                         </span>

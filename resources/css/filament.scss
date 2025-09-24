@@ -1,8 +1,6 @@
-@import url('https://unpkg.com/tippy.js@6/dist/tippy.css');
-
-@import './kanban';
-@import './dialogs';
-@import './loading.io';
+@use './kanban';
+@use './dialogs';
+@use './loading.io';
 
 .filament-header-heading {
     display: block;

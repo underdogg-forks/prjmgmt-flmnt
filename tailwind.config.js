@@ -7,7 +7,6 @@ module.exports = {
         './app/Filament/**/*.php',
         './app/Http/Livewire/**/*.php',
         './vendor/filament/**/*.blade.php',
-        './node_modules/flowbite/**/*.js'
     ],
     darkMode: 'class',
     theme: {
@@ -18,11 +17,21 @@ module.exports = {
                 success: colors.green,
                 warning: colors.yellow,
             },
+            spacing: {
+                1: '0.25rem', // Ensure is available for spacing
+            },
+            gap: {
+                1: '0.25rem', // Ensure is available for gap utilities
+            },
         },
     },
     plugins: [
         require('@tailwindcss/forms'),
         require('@tailwindcss/typography'),
         require('flowbite/plugin')
+    ],
+    safelist: [
+        'gap-1',
+        'bg-white',
     ],
 }

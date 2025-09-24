@@ -195,8 +195,8 @@ class JiraImport extends Page implements HasForms
                                         if ($this->projects) {
                                             foreach ($this->projects as $project) {
                                                 $list[$project->key] = new HtmlString(
-                                                    "<div class='w-full flex flex-col gap-1'>"
-                                                    . "<div class='w-full flex items-center gap-1'>"
+                                                    "<div class='w-full flex flex-col'>"
+                                                    . "<div class='w-full flex items-center'>"
                                                     . "<img src='" . $project->avatarUrls->{'16x16'} . "' class='rounded-full w-8 h-8 shadow' />"
                                                     . "<span class='font-medium text-gray-700 text-base'>" . $project->name . '</span>'
                                                     . "<div class='text-gray-700 text-xs font-light'><span class='font-medium uppercase'>/</span> " . $project->key . '</div>'
@@ -249,8 +249,8 @@ class JiraImport extends Page implements HasForms
                                                     $fields[] = Checkbox::make('data.' . Str::slug($projectKey) . '_' . Str::slug($issue['code']))
                                                         ->label(function () use ($issue) {
                                                             return new HtmlString(
-                                                                "<div class='w-full flex flex-col gap-1'>"
-                                                                . "<div class='w-full flex items-center gap-1'>"
+                                                                "<div class='w-full flex flex-col'>"
+                                                                . "<div class='w-full flex items-center'>"
                                                                 . "<div class='text-gray-700 text-xs font-light'><span class='font-medium uppercase'>" . $issue['code'] . '</span> ' . $issue['name'] . '</div>'
                                                                 . '</div>'
                                                                 . '</div>'
