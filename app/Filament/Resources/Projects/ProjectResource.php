@@ -34,6 +34,7 @@ use Filament\Tables\Columns\TagsColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
+use Filament\Support\Enums\Heroicon;
 use Illuminate\Support\HtmlString;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
@@ -42,13 +43,13 @@ class ProjectResource extends Resource
 {
     protected static ?string $model = Project::class;
 
-    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-archive-box';
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::ARCHIVE_BOX_OUTLINE;
 
     protected static ?int $navigationSort = 1;
 
     public static function getNavigationLabel(): string
     {
-        return __('Projects');
+        return trans('proj.projects');
     }
 
     public static function getPluralLabel(): ?string
@@ -58,7 +59,7 @@ class ProjectResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return __('Management');
+        return trans('proj.management');
     }
 
     public static function form(Schema $schema): Schema
@@ -71,10 +72,10 @@ class ProjectResource extends Resource
                             ->columns(3)
                             ->schema([
                                 SpatieMediaLibraryFileUpload::make('cover')
-                                    ->label(__('Cover image'))
+                                    ->label(trans('proj.cover_image'))
                                     ->image()
                                     ->helperText(
-                                        __('If not selected, an image will be generated based on the project name')
+                                        trans('proj.cover_image_helper')
                                     )
                                     ->columnSpan(1),
 
@@ -86,13 +87,13 @@ class ProjectResource extends Resource
                                             ->columns(12)
                                             ->schema([
                                                 TextInput::make('name')
-                                                    ->label(__('Project name'))
+                                                    ->label(trans('proj.project_name'))
                                                     ->required()
                                                     ->columnSpan(10)
                                                     ->maxLength(255),
 
                                                 TextInput::make('ticket_prefix')
-                                                    ->label(__('Ticket prefix'))
+                                                    ->label(trans('proj.ticket_prefix'))
                                                     ->maxLength(3)
                                                     ->columnSpan(2)
                                                     ->unique(Project::class, 'ticket_prefix', true)
@@ -103,14 +104,14 @@ class ProjectResource extends Resource
                                             ]),
 
                                         Select::make('owner_id')
-                                            ->label(__('Project owner'))
+                                            ->label(trans('proj.project_owner'))
                                             ->searchable()
                                             ->options(fn () => User::all()->pluck('name', 'id')->toArray())
                                             ->default(fn () => auth()->user()->id)
                                             ->required(),
 
                                         Select::make('status_id')
-                                            ->label(__('Project status'))
+                                            ->label(trans('proj.project_status'))
                                             ->searchable()
                                             ->options(fn () => ProjectStatus::all()->pluck('name', 'id')->toArray())
                                             ->default(fn () => ProjectStatus::where('is_default', true)->first()?->id)
@@ -118,24 +119,24 @@ class ProjectResource extends Resource
                                     ]),
 
                                 RichEditor::make('description')
-                                    ->label(__('Project description'))
+                                    ->label(trans('proj.project_description'))
                                     ->columnSpan(3),
 
                                 Select::make('type')
-                                    ->label(__('Project type'))
+                                    ->label(trans('proj.project_type'))
                                     ->searchable()
                                     ->options([
-                                        'kanban' => __('Kanban'),
-                                        'scrum'  => __('Scrum'),
+                                        'kanban' => trans('proj.kanban'),
+                                        'scrum'  => trans('proj.scrum'),
                                     ])
                                     ->reactive()
                                     ->default(fn () => 'kanban')
                                     ->helperText(function ($state) {
                                         if ($state === 'kanban') {
-                                            return __('Display and move your project forward with issues on a powerful board.');
+                                            return trans('proj.kanban_helper');
                                         }
                                         if ($state === 'scrum') {
-                                            return __('Achieve your project goals with a board, backlog, and roadmap.');
+                                            return trans('proj.scrum_helper');
                                         }
 
                                         return '';
@@ -143,14 +144,14 @@ class ProjectResource extends Resource
                                     ->required(),
 
                                 Select::make('status_type')
-                                    ->label(__('Statuses configuration'))
+                                    ->label(trans('proj.statuses_configuration'))
                                     ->helperText(
-                                        __('If custom type selected, you need to configure project specific statuses')
+                                        trans('proj.statuses_configuration_helper')
                                     )
                                     ->searchable()
                                     ->options([
-                                        'default' => __('Default'),
-                                        'custom'  => __('Custom configuration'),
+                                        'default' => trans('proj.default'),
+                                        'custom'  => trans('proj.custom_configuration'),
                                     ])
                                     ->default(fn () => 'default')
                                     ->disabled(fn ($record) => $record && $record->tickets()->count())
@@ -165,24 +166,24 @@ class ProjectResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('cover')
-                    ->label(__('Cover image'))
+                    ->label(trans('proj.cover_image'))
                     ->formatStateUsing(fn ($state) => new HtmlString('
                             <div style=\'background-image: url("' . $state . '")\'
                                  class="w-8 h-8 bg-cover bg-center bg-no-repeat"></div>
                         ')),
 
                 TextColumn::make('name')
-                    ->label(__('Project name'))
+                    ->label(trans('proj.project_name'))
                     ->sortable()
                     ->searchable(),
 
                 TextColumn::make('owner.name')
-                    ->label(__('Project owner'))
+                    ->label(trans('proj.project_owner'))
                     ->sortable()
                     ->searchable(),
 
                 TextColumn::make('status.name')
-                    ->label(__('Project status'))
+                    ->label(trans('proj.project_status'))
                     ->formatStateUsing(fn ($record) => new HtmlString('
                             <div class="flex items-center gap-2">
                                 <span class="filament-tables-color-column relative flex h-6 w-6 rounded-md"
@@ -194,13 +195,14 @@ class ProjectResource extends Resource
                     ->searchable(),
 
                 TagsColumn::make('users.name')
-                    ->label(__('Affected users'))
+                    ->label(trans('proj.affected_users'))
                     ->limit(2),
 
-                BadgeColumn::make('type')
+                TextColumn::make('type')
+                    ->bage()
                     ->enum([
-                        'kanban' => __('Kanban'),
-                        'scrum'  => __('Scrum'),
+                        'kanban' => trans('proj.kanban'),
+                        'scrum'  => trans('proj.scrum'),
                     ])
                     ->colors([
                         'secondary' => 'kanban',
@@ -208,26 +210,26 @@ class ProjectResource extends Resource
                     ]),
 
                 TextColumn::make('created_at')
-                    ->label(__('Created at'))
+                    ->label(trans('proj.created_at'))
                     ->dateTime()
                     ->sortable()
                     ->searchable(),
             ])
             ->filters([
                 SelectFilter::make('owner_id')
-                    ->label(__('Owner'))
+                    ->label(trans('proj.owner'))
                     ->multiple()
                     ->options(fn () => User::all()->pluck('name', 'id')->toArray()),
 
                 SelectFilter::make('status_id')
-                    ->label(__('Status'))
+                    ->label(trans('proj.status'))
                     ->multiple()
                     ->options(fn () => ProjectStatus::all()->pluck('name', 'id')->toArray()),
             ])
             ->recordActions([
                 Action::make('favorite')
                     ->label('')
-                    ->icon('heroicon-o-star')
+                    ->icon(Heroicon::STAR_OUTLINE)
                     ->color(fn ($record) => auth()->user()->favoriteProjects()
                         ->where('projects.id', $record->id)->count() ? 'success' : 'default')
                     ->action(function ($record) {
@@ -243,7 +245,7 @@ class ProjectResource extends Resource
                                 'user_id'    => auth()->user()->id,
                             ]);
                         }
-                        Filament::notify('success', __('Project updated'));
+                        Filament::notify('success', trans('proj.project_updated'));
                     }),
 
                 ViewAction::make(),
@@ -251,8 +253,8 @@ class ProjectResource extends Resource
 
                 ActionGroup::make([
                     Action::make('exportLogHours')
-                        ->label(__('Export hours'))
-                        ->icon('heroicon-o-document-arrow-down')
+                        ->label(trans('proj.export_hours'))
+                        ->icon(Heroicon::DOCUMENT_ARROW_DOWN_OUTLINE)
                         ->color('gray')
                         ->action(fn ($record) => Excel::download(
                             new ProjectHoursExport($record),
@@ -263,9 +265,9 @@ class ProjectResource extends Resource
 
                     Action::make('kanban')
                         ->label(
-                            fn ($record) => ($record->type === 'scrum' ? __('Scrum board') : __('Kanban board'))
+                            fn ($record) => ($record->type === 'scrum' ? trans('proj.scrum_board') : trans('proj.kanban_board'))
                         )
-                        ->icon('heroicon-o-view-columns')
+                        ->icon(Heroicon::VIEW_COLUMNS_OUTLINE)
                         ->color('gray')
                         ->url(function ($record) {
                             if ($record->type === 'scrum') {
